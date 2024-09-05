@@ -29,5 +29,5 @@ func main() {
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
-	log.Fatal(r.Run(fmt.Sprintf("127.0.0.1:%v", config.ENV.PORT)))
+	log.Fatal(r.Run(fmt.Sprintf(":%v", config.ENV.PORT)))
 }
