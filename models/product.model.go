@@ -13,6 +13,30 @@ type Product struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
+type SwaggerProductRes struct {
+    Status string  `json:"status" example:"ok"`
+    Data   Product `json:"data"`
+}
+
+type SwaggerProductsRes struct {
+	Status string  `json:"status" example:"ok"`
+    CurrentPate int `json:"current_page"`
+    TotalPage int `json:"total_page"`
+    TotalData int `json:"total_data"`
+	Data   Product `json:"data"`	
+}
+
+type SwaggerCreateProduct struct {
+	Name      string    `json:"name"`
+	Price     int32    `json:"price"`
+}
+
+type SwaggerDeleteProductRes struct {
+	Status string  `json:"status" example:"ok"`
+}
+
+
+
 func CreateProduct(product *Product) error {
 	return config.DB.Create(product).Error
 }

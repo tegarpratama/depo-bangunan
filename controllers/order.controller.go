@@ -10,6 +10,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @Summary Create Order
+// @Description Create Order
+// @Tags Orders
+// @Accept json
+// @Produce json
+// @Param product_id   path     string  true  "product_id"
+// @Param qty   path     string  true  "qty"
+// @Success 200 {object} models.SwaggerCreateOrderRes
+// @Failure 400 {object} models.SwaggerErrorRes
+// @Router /orders [post]
 func CreateOrder(c *gin.Context) {
 	var input models.CreateOrderReq
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -52,6 +62,17 @@ func CreateOrder(c *gin.Context) {
 	})
 }
 
+// @Summary Get all orders
+// @Description Get all orders
+// @Tags Orders
+// @Accept json
+// @Produce json
+//  @Param  page  query string  false  "move page"  
+//  @Param  limit  query string  false  "limit data"  
+//  @Param  search  query string  false  "search data" 
+// @Success 200 {object} models.SwaggerOrderRes
+// @Failure 400 {object} models.SwaggerErrorRes
+// @Router /orders [get]
 func GetOrders(c *gin.Context) {
 	search := c.Query("search")
 	page := c.DefaultQuery("page", "1")
@@ -78,6 +99,15 @@ func GetOrders(c *gin.Context) {
 	})
 }
 
+// @Summary Get Detail Order
+// @Description  Get Detail Order
+// @Tags Orders
+// @Accept json
+// @Produce json
+// @Param id path int true "Order ID"
+// @Success 200 {object} models.SwaggerDetailOrderRes
+// @Failure 400 {object} models.SwaggerErrorRes
+// @Router /orders/{id}/detail [get]
 func DetailOrder(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
@@ -97,6 +127,15 @@ func DetailOrder(c *gin.Context) {
 	})
 }
 
+// @Summary Update Order
+// @Description  Update Order
+// @Tags Orders
+// @Accept json
+// @Produce json
+// @Param id path int true "Order ID"
+// @Success 200 {object} models.SwaggerUpdateOrderRes
+// @Failure 400 {object} models.SwaggerErrorRes
+// @Router /orders/{id}/update [put]
 func UpdateOrder(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
@@ -146,6 +185,15 @@ func UpdateOrder(c *gin.Context) {
 	})
 }
 
+// @Summary Delete Order
+// @Description  Delete Order
+// @Tags Orders
+// @Accept json
+// @Produce json
+// @Param id path int true "Order ID"
+// @Success 200 {object} models.SwaggerDeleteOrderRes
+// @Failure 400 {object} models.SwaggerErrorRes
+// @Router /orders/{id}/delete [delete]
 func DeleteOrder(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {

@@ -44,6 +44,33 @@ type UserLoggedIn struct {
 	Token string `json:"token"`
 }
 
+type SwaggerRegisterRes struct {
+    Status string  `json:"status" example:"ok"`
+    Data   User `json:"data"`
+}
+
+type SwaggerLoginRes struct {
+    Status string  `json:"status" example:"ok"`
+    Data   UserLoggedIn `json:"data"`
+}
+
+type SwaggerErrorRes struct {
+    Status string  	`json:"status" example:"error"`
+    Message   string `json:"message"`
+}
+
+type SwaggerUserRes struct {
+	Status string  `json:"status" example:"ok"`
+    CurrentPate int `json:"current_page"`
+    TotalPage int `json:"total_page"`
+    TotalData int `json:"total_data"`
+	Data   User `json:"data"`	
+}
+
+type SwaggerDeleteUserRes struct {
+	Status string  `json:"status" example:"ok"`
+}
+
 func GetCustomerByEmail(email string) User {
 	var customer User
 	if err := config.DB.Where("email = ?", email).First(&customer).Error; err != nil {

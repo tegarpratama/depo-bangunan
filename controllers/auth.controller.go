@@ -9,10 +9,22 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @Summary Create a new user
+// @Description Register a new user by providing name, email, and password
+// @Tags Authentication
+// @Accept json
+// @Produce json
+// @Param name   body     string  true  "Name"
+// @Param email   body     string  true  "email"
+// @Param password   body     string  true  "password"
+// @Param password_confirm   body     string  true  "password_confirm"
+// @Success 200 {object} models.SwaggerRegisterRes
+// @Failure 400 {object} models.SwaggerErrorRes
+// @Router /auth/register [post]
 func Register(c *gin.Context) {
 	var input models.Register
 	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": err.Error()})
 		return
 	}
 
@@ -56,6 +68,16 @@ func Register(c *gin.Context) {
 	})
 }
 
+// @Summary Login
+// @Description Login user
+// @Tags Authentication
+// @Accept json
+// @Produce json
+// @Param email   body     string  true  "email"
+// @Param password   body     string  true  "password"
+// @Success 200 {object} models.SwaggerLoginRes
+// @Failure 400 {object} models.SwaggerErrorRes
+// @Router /auth/login [post]
 func Login(c *gin.Context) {
 	var input models.Login
 	if err := c.ShouldBindJSON(&input); err != nil {

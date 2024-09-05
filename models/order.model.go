@@ -23,15 +23,41 @@ type CreateOrderReq struct {
 	Qty			int32 `json:"qty" binding:"required"`
 }
 
-// type CreateOrderRes struct {
-// ID         uint 	`json:"id"`
-// OrderNumber string  `json:"order_number"`
-// ProductName     string 	`json:"product_name"`
-// Status     string 	`json:"status"`
-// Total      int32	`json:"total"`
-// CreatedAt  time.Time `json:"created_at"`
-// UpdatedAt  time.Time  `json:"updated_at"`
-// }
+type OrderNumberRes struct {
+	OrderNumber string `json:"order_number"`
+}
+
+type UpdatedOrder struct {
+	OrderNumber string `json:"order_number"`
+	ProductID string `json:"product_id"`
+	Qty string `json:"qty"`
+}
+
+type SwaggerCreateOrderRes struct {
+	Status string  `json:"status" example:"ok"`
+    Data   OrderNumberRes `json:"data"`
+}
+
+type SwaggerUpdateOrderRes struct {
+	Status string  `json:"status" example:"ok"`
+    Data   UpdatedOrder `json:"data"`
+}
+type SwaggerOrderRes struct {
+	Status string  `json:"status" example:"ok"`
+    CurrentPate int `json:"current_page"`
+    TotalPage int `json:"total_page"`
+    TotalData int `json:"total_data"`
+	Data   OrderNumberRes `json:"data"`	
+}
+
+type SwaggerDetailOrderRes struct {
+	Status string  `json:"status" example:"ok"`
+    Data   Order `json:"data"`
+}
+
+type SwaggerDeleteOrderRes struct {
+	Status string  `json:"status" example:"ok"`
+}
 
 func GetAllOrders(offset int, limit int, search string) ([]Order, int64, error) {
 	var orders []Order

@@ -9,6 +9,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @Summary Create Product
+// @Description Create Product
+// @Tags Products
+// @Accept json
+// @Produce json
+// @Param name   body     string  true  "name"
+// @Param price   body     string  true  "price"
+// @Success 200 {object} models.SwaggerProductRes
+// @Failure 400 {object} models.SwaggerErrorRes
+// @Router /products [post]
 func CreateProduct(c *gin.Context) {
 	var input models.Product
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -32,6 +42,17 @@ func CreateProduct(c *gin.Context) {
 	})
 }
 
+// @Summary Get Products
+// @Description Get Products
+// @Tags Products
+// @Accept json
+// @Produce json
+//  @Param  page  query string  false  "move page"  
+//  @Param  limit  query string  false  "limit data"  
+//  @Param  search  query string  false  "search data"  
+// @Success 200 {object} models.SwaggerProductsRes
+// @Failure 400 {object} models.SwaggerErrorRes
+// @Router /products [get]
 func GetProducts(c *gin.Context) {
 	search := c.Query("search")
 	page := c.DefaultQuery("page", "1")
@@ -58,7 +79,17 @@ func GetProducts(c *gin.Context) {
 	})
 }
 
-
+// @Summary Update Products
+// @Description Update Products
+// @Tags Products
+// @Accept json
+// @Produce json
+// @Param id path int true "Product ID"
+// @Param name   body     string  true  "name"
+// @Param price   body     string  true  "price"
+// @Success 200 {object} models.SwaggerCreateProduct
+// @Failure 400 {object} models.SwaggerErrorRes
+// @Router /products/{id}/update [put]
 func UpdateProduct(c *gin.Context) {
     id, err := strconv.Atoi(c.Param("id"))
     if err != nil {
@@ -97,6 +128,15 @@ func UpdateProduct(c *gin.Context) {
 	})
 }
 
+// @Summary Delete Products
+// @Description Delete Products
+// @Tags Products
+// @Accept json
+// @Produce json
+// @Param id path int true "Product ID"
+// @Success 200 {object} models.SwaggerDeleteProductRes
+// @Failure 400 {object} models.SwaggerErrorRes
+// @Router /products/{id}/delete [delete]
 func DeleteProduct(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {

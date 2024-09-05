@@ -10,6 +10,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @Summary Create Customer
+// @Description Create new customer
+// @Tags Customers
+// @Accept json
+// @Produce json
+// @Param name   body     string  true  "name"
+// @Param email   body     string  true  "email"
+// @Success 200 {object} models.SwaggerRegisterRes
+// @Failure 400 {object} models.SwaggerErrorRes
+// @Router /customers [post]
 func CreateCustomers(c *gin.Context) {
 	var input models.CreateCustomerReq
 
@@ -53,6 +63,17 @@ func CreateCustomers(c *gin.Context) {
 })
 }
 
+// @Summary Get All Customers
+// @Description  Get All Customers
+// @Tags Customers
+// @Accept json
+// @Produce json
+//  @Param  page  query string  false  "move page"  
+//  @Param  limit  query string  false  "limit data"  
+//  @Param  search  query string  false  "search data"  
+// @Success 200 {object} models.SwaggerUserRes
+// @Failure 400 {object} models.SwaggerErrorRes
+// @Router /customers [get]
 func GetCustomers(c *gin.Context) {
 	search := c.Query("search")
 	page := c.DefaultQuery("page", "1")
@@ -79,6 +100,15 @@ func GetCustomers(c *gin.Context) {
 	})
 }
 
+// @Summary Get Detail Customer
+// @Description  Get Detail Customer
+// @Tags Customers
+// @Accept json
+// @Produce json
+// @Param id path int true "User ID"
+// @Success 200 {object} models.SwaggerRegisterRes
+// @Failure 400 {object} models.SwaggerErrorRes
+// @Router /customers/{id}/detail [get]
 func DetailCustomers(c *gin.Context) {
     id, err := strconv.Atoi(c.Param("id"))
     if err != nil {
@@ -98,6 +128,17 @@ func DetailCustomers(c *gin.Context) {
 	})
 }
 
+// @Summary Update Customer
+// @Description  Update Customer
+// @Tags Customers
+// @Accept json
+// @Produce json
+// @Param id path int true "User ID"
+// @Param name   body     string  true  "name"
+// @Param email   body     string  true  "email"
+// @Success 200 {object} models.SwaggerRegisterRes
+// @Failure 400 {object} models.SwaggerErrorRes
+// @Router /customers/{id}/update [put]
 func UpdateCustomer(c *gin.Context) {
     id, err := strconv.Atoi(c.Param("id"))
     if err != nil {
@@ -136,6 +177,15 @@ func UpdateCustomer(c *gin.Context) {
 	})
 }
 
+// @Summary Delete Custtomer
+// @Description  Delete Custtomer
+// @Tags Customers
+// @Accept json
+// @Produce json
+// @Param id path int true "User ID"
+// @Success 200 {object} models.SwaggerDeleteUserRes
+// @Failure 400 {object} models.SwaggerErrorRes
+// @Router /customers/{id}/delete [delete]
 func DeleteCustomer(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
